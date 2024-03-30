@@ -1,23 +1,28 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button } from 'react-native';
 
-function New({ addNewItem, navigation }) {
+function New({ route, navigation }) {
     const [itemName, setItemName] = useState('');
+    const [itemDescr, setItemDescr] = useState('');
 
     const handleAddItem = () => {
-        // Verifica se o nome do item não está vazio
         if (itemName.trim() === '') {
             return;
         }
 
-        // Cria um novo item com um ID único
         const newItem = {
             id: new Date().getTime(),
             name: itemName,
+            descricao: itemDescr,
         };
-        console.log(newItem)
-        // Chama a função para adicionar o novo item ao array de dados na tela Home
-        addNewItem(newItem);
+
+        // Verifica se a função onNewItemAdded foi passada como parâmetro via route
+        const onNewItemAdded = route.params?.addNewItem;
+
+        if (onNewItemAdded) {
+            // Chama a função para adicionar o novo item
+            onNewItemAdded(newItem);
+        }
 
         // Navega de volta para a tela anterior (Home)
         navigation.goBack();
@@ -30,6 +35,12 @@ function New({ addNewItem, navigation }) {
                 placeholder="Nome do Item"
                 value={itemName}
                 onChangeText={setItemName}
+                style={{ borderWidth: 1, borderColor: 'gray', padding: 10, margin: 10, width: 200 }}
+            />
+            <TextInput
+                placeholder="Descrição do Item"
+                value={itemDescr}
+                onChangeText={setItemDescr}
                 style={{ borderWidth: 1, borderColor: 'gray', padding: 10, margin: 10, width: 200 }}
             />
             <Button title="Adicionar Item" onPress={handleAddItem} />

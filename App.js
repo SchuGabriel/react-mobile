@@ -11,9 +11,9 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home} options={{ title: 'Overview' }} />
-        <Stack.Screen name="Details" component={Details} />
-        <Stack.Screen name="New" component={New} />
+        <Stack.Screen name="Home" component={Home} options={{ title: 'Lista de Compras' }} />
+        <Stack.Screen name="Details" component={Details} options={{ title: 'Detalhes do Item' }} />
+        <Stack.Screen name="New" component={New} options={{ title: 'Novo Item' }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
