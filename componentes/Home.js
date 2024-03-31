@@ -60,14 +60,14 @@ function Home() {
     };
 
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <View style={{ flex: 1, alignItems: 'right', justifyContent: 'center' }}>
             <Button title="Adicionar Produto" onPress={() => goToNew(navigation, addNewItem)} />
             <FlatList
                 data={data}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => (
                     <TouchableOpacity onPress={() => navigateToDetails(item)}>
-                        <View style={{ marginVertical: 10 }}>
+                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', marginVertical: 10 }}>
                             <Text>{item.name}</Text>
                         </View>
                     </TouchableOpacity>
