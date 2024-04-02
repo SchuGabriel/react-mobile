@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'; // Importando TouchableOpacity e StyleSheet
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 function Details() {
@@ -27,8 +27,14 @@ function Details() {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>{item.name}</Text>
-            <Text style={styles.text}>{item.description}</Text>
+            <View style={styles.itemContainer}>
+                <Text style={styles.label}>Nome:</Text>
+                <Text style={styles.value}>{item.name}</Text>
+            </View>
+            <View style={styles.itemContainer}>
+                <Text style={styles.label}>Observação:</Text>
+                <Text style={styles.value}>{item.description}</Text>
+            </View>
             <TouchableOpacity onPress={deleteItem} style={styles.button}>
                 <Text style={styles.buttonText}>Delete Item</Text>
             </TouchableOpacity>
@@ -42,8 +48,19 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    text: {
+    itemContainer: {
+        borderWidth: 1,
+        borderColor: 'black',
+        padding: 10,
         marginBottom: 10,
+        width: '80%',
+    },
+    label: {
+        fontWeight: 'bold',
+        marginBottom: 5,
+    },
+    value: {
+        fontSize: 16,
     },
     button: {
         backgroundColor: 'red',
