@@ -13,7 +13,7 @@ function New({ route, navigation }) {
         const newItem = {
             id: new Date().getTime(),
             name: itemName,
-            descricao: itemDescr,
+            description: itemDescr,
         };
 
         // Verifica se a função onNewItemAdded foi passada como parâmetro via route
