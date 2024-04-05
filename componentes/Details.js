@@ -6,7 +6,6 @@ function Details() {
     const navigation = useNavigation();
     const route = useRoute();
 
-    // Extrai o item passado como parâmetro de navegação
     const { item, data } = route.params;
 
     // Função para excluir o item

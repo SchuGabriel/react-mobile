@@ -38,24 +38,17 @@ function Home() {
 
     // Função para adicionar um novo item ao array de dados
     const addNewItem = (newItem) => {
-        // Verifica o último id na lista de dados
         const lastId = data.length > 0 ? data[data.length - 1].id : 0;
-        // Calcula o novo id incrementando o último id
         const newId = lastId + 1;
-        // Atualiza o id do novo item
         newItem.id = newId;
-        // Adiciona o novo item à lista de dados
         setData([...data, newItem]);
     };
 
-    // Função para tratar a adição de um novo item recebido do componente New
     const handleNewItemAdded = (newItem) => {
         addNewItem(newItem);
     };
 
-    // Função para navegar para a tela de detalhes
     const navigateToDetails = (item) => {
-        // Navega para a tela de detalhes, passando o item como parâmetro
         navigation.navigate('Details', { item, data });
     };
 

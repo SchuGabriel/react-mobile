@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
 function New({ route, navigation }) {
     const [itemName, setItemName] = useState('');
@@ -16,36 +16,60 @@ function New({ route, navigation }) {
             description: itemDescr,
         };
 
-        // Verifica se a função onNewItemAdded foi passada como parâmetro via route
         const onNewItemAdded = route.params?.addNewItem;
 
         if (onNewItemAdded) {
-            // Chama a função para adicionar o novo item
             onNewItemAdded(newItem);
         }
-
-        // Navega de volta para a tela anterior (Home)
         navigation.goBack();
     };
 
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text>Adicionar Novo Item</Text>
+        <View style={styles.container}>
+            <Text style={styles.title}>Adicionar Novo Item</Text>
             <TextInput
                 placeholder="Nome do Item"
                 value={itemName}
                 onChangeText={setItemName}
-                style={{ borderWidth: 1, borderColor: 'gray', padding: 10, margin: 10, width: 200 }}
+                style={styles.input}
             />
             <TextInput
                 placeholder="Descrição do Item"
                 value={itemDescr}
                 onChangeText={setItemDescr}
-                style={{ borderWidth: 1, borderColor: 'gray', padding: 10, margin: 10, width: 200 }}
+                style={styles.input}
             />
-            <Button title="Adicionar Item" onPress={handleAddItem} />
+            <View style={styles.buttonContainer}>
+                <Button title="Adicionar Item" onPress={handleAddItem}/>
+            </View>
         </View>
     );
-}
+};
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    title: {
+        fontSize: 20,
+        marginBottom: 10,
+    },
+    input: {
+        borderWidth: 1,
+        borderColor: 'gray',
+        padding: 10,
+        marginVertical: 5,
+        width: '80%',
+    },
+    buttonContainer: {
+        backgroundColor: 'blue',
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        borderRadius: 5,
+        marginTop: 10,
+    },
+});
 
 export default New;
