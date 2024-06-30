@@ -1,4 +1,3 @@
-// src/services/authService.js
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const USER_KEY = 'user_key';

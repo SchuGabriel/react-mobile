@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { View, Text, Button, FlatList, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { goToDetailsScreen, goToNew } from './Navigation';
+import { goToNew } from './Navigation';
+import { removeUser } from '../src/services/authService';
 
 function Home() {
     const navigation = useNavigation();
 
-    // Array de dados
     const [data, setData] = useState([
         { id: 1, name: 'Leite', description: 'Comprar 2 caixas de leite Santa Clara Integral' },
         { id: 2, name: 'Farinha de trigo', description: 'Comprar 2 unidades de 5 KG da marca "Maria Inês"' },
@@ -34,9 +34,7 @@ function Home() {
         { id: 24, name: 'Cenoura', description: 'Comprar 1 KG de cenoura' },
         { id: 25, name: 'Alface', description: 'Comprar 1 maço de alface' },
     ]);
-    
 
-    // Função para adicionar um novo item ao array de dados
     const addNewItem = (newItem) => {
         const lastId = data.length > 0 ? data[data.length - 1].id : 0;
         const newId = lastId + 1;
@@ -44,28 +42,31 @@ function Home() {
         setData([...data, newItem]);
     };
 
-    const handleNewItemAdded = (newItem) => {
-        addNewItem(newItem);
-    };
-
     const navigateToDetails = (item) => {
         navigation.navigate('Details', { item, data });
     };
 
+    const handleLogout = async () => {
+        await removeUser();
+        navigation.navigate('LoginScreen');
+    };
+
     return (
-        <View style={{ flex: 1, alignItems: 'right', justifyContent: 'center' }}>
+        <View style={{ flex: 1 }}>
             <Button title="Adicionar Produto" onPress={() => goToNew(navigation, addNewItem)} />
             <FlatList
                 data={data}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => (
                     <TouchableOpacity onPress={() => navigateToDetails(item)}>
-                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', marginVertical: 10 }}>
+                        <View style={{ alignItems: 'center', justifyContent: 'center', marginVertical: 10 }}>
                             <Text>{item.name}</Text>
+                            <Text style={{ marginTop: 5, fontStyle: 'italic', color: '#666' }}>{item.description}</Text>
                         </View>
                     </TouchableOpacity>
                 )}
             />
+            <Button title="Logout" onPress={handleLogout} />
         </View>
     );
 }
